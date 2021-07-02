@@ -36,6 +36,7 @@ export default {
         })
         .then(response=> {
           localStorage.setItem('AToken',response.data.token)
+          localStorage.setItem('user_id',response.data.user_id)
           console.log(response);
           this.$router.push('/dashboard')
         })

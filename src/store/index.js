@@ -34,8 +34,8 @@ export const storage = {
     setTodo(state, payload){
       state.todo = payload
     },
-    addToCard( state, payload ){
-      state.cart.push(payload)
+    setCart( state, payload ){
+      state.cart = payload
     },
     removeItem(state, payload){
       state.cart.splice(payload, 1)

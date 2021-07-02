@@ -6,7 +6,7 @@
       <router-link
         class="text-light btn btn-icon btn-primary text-center"
         style="width: 180px; padding: 12px"
-        :to="{ path: '/brands' }"
+        :to="{ path: '/product/create' }"
       >
         CREATE PRODUCT
       </router-link>
@@ -20,6 +20,7 @@
               <th scope="col">title</th>
               <th scope="col">Category Name</th>
               <th scope="col">Image</th>
+              <th scope="col">Price</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -27,19 +28,19 @@
             <tr v-for="product in products" :key="product.id">
               <th scope="row">1</th>
               <td style="width:100px">{{product.title}}</td>
-              <td>{{product.category}}</td>
+              <td>{{product.category.name}}</td>
               <td>
-                <img :src="product.image" alt="">
+                <img :src="'image/'+product.image">
               </td>
+              <td>{{product.price}}</td>
               <td>
-                <router-link :to="{path:'/product-edit/' + product.id}" class="btn btn-success btn-sm"
-                  ><i class="mdi mdi-table-edit"></i
-                ></router-link>
-                <router-link :to="{path:'/product-detail/' + product.id}" class="btn btn-success btn-sm"
-                  ><i class="mdi mdi-table-eye"></i
-                ></router-link>
+                <router-link
+              class="btn btn-success btn-sm"
+              :to="{ path: '/product-edit/' + product.id }"
+              ><i class="mdi mdi-table-edit"></i
+            ></router-link>
                 <button
-                  @click="removeBrand(brand.id)"
+                  @click="removeBrand(product.id)"
                   class="btn btn-danger btn-sm"
                   href=""
                 >
@@ -63,12 +64,18 @@ export default {
     }
   },
   methods: {
-   
+
     all_product() {
-      axios.get("https://fakestoreapi.com/products").then((res) => {
+      axios.get("http://localhost/laravelVuejsPos/public/api/product/index").then((res) => {
         this.$store.commit("setProduct", res.data);
       });
     },
+
+    removeBrand(id){
+      axios.get('http://localhost/laravelVuejsPos/public/api/product/delete/' + id).then((response)=>{
+        this.all_product();
+      })
+    }
   },
   mounted() {
     this.all_product();

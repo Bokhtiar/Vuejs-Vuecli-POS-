@@ -40,6 +40,10 @@ export default new Router({
           component: () => import('../components/admin/product/index.vue'),
         },
         {
+          path: '/product/create',
+          component: () => import('../components/admin/product/create.vue'),
+        },
+        {
           path: '/product-edit/:id',
           component: () => import('../components/admin/product/edit.vue'),
         },
@@ -66,8 +70,6 @@ export default new Router({
           path: '/logout',
           component: () => import('../components/admin/auth/logout.vue'),
         },
-
-
       ]
     },
 

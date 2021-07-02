@@ -8,6 +8,7 @@
 export default {
  mounted(){
     var atoken = localStorage.getItem('AToken')
+    
       if(atoken){
         this.$router.push('/dashboard')
       }else{

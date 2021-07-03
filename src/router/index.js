@@ -57,6 +57,21 @@ export default new Router({
         },
 
         {
+          path: '/customers',
+          component: () => import('../components/admin/customer/index.vue'),
+        },
+
+        {
+          path: '/customer/create',
+          component: () => import('../components/admin/customer/create.vue'),
+        },
+
+        {
+          path: '/edit/customer/:id',
+          component: () => import('../components/admin/customer/edit.vue'),
+        },
+
+        {
           path: '/login',
           component: () => import('../components/admin/auth/login.vue'),
         },

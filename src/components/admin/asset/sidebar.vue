@@ -48,10 +48,10 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
-                <span class="menu-title">Tables</span>
+              <router-link class="nav-link" :to="{path:'/customers'}">
+                <span class="menu-title">Customers</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">

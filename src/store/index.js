@@ -6,6 +6,7 @@ export const storage = {
     todo : [],
     brand: [],
     product: [],
+    customer: [],
   },
   getters: {
     getInventory(state){
@@ -25,6 +26,9 @@ export const storage = {
     },
     getProduct(state){
       return state.product
+    },
+    getCustomer(state){
+      return state.customer
     }
   },
   mutations: {
@@ -48,6 +52,9 @@ export const storage = {
     },
     setProduct(state, payload){
       state.product = payload
+    },
+    setCustomer(state, payload){
+      state.customer = payload
     }
   }
 }

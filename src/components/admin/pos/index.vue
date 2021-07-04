@@ -64,7 +64,7 @@
           <div class="my-2">
             <p class="bg-light" v-for="cart in carts" :key="cart.id">
               {{ cart.product.title }}
-                var = total =0;
+
               <span class="" style="display: none">{{
                 (total += cart.product.price * cart.quantity)
               }}</span>
@@ -129,7 +129,7 @@ export default {
 
   data() {
     return {
-
+  
       search: "",
       customer_id: "",
       due_price : "",

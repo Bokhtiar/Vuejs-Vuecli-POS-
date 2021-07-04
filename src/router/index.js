@@ -70,6 +70,15 @@ export default new Router({
           path: '/edit/customer/:id',
           component: () => import('../components/admin/customer/edit.vue'),
         },
+        {
+          path: '/orders',
+          component: () => import('../components/admin/order/index.vue'),
+        },
+
+        {
+          path: '/order/detail/:id',
+          component: () => import('../components/admin/order/detail.vue'),
+        },
 
         {
           path: '/login',

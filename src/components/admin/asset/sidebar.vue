@@ -53,6 +53,14 @@
                 <i class="mdi mdi-table-large menu-icon"></i>
               </router-link>
             </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path:'/orders'}">
+                <span class="menu-title">All Orders</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </router-link>
+            </li>
+
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                 <span class="menu-title">Sample Pages</span>

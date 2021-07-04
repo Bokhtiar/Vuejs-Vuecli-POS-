@@ -5,7 +5,7 @@
         <li v-for="category in categories" :key="category.id">
           <button
             @click="category_ways_product_show(category.id)"
-            class="mt-2 btn btn-info btn-sm"
+            class="mt-2 btn btn-primary btn-sm"
             href="#home"
           >
             {{ category.name }}
@@ -62,15 +62,60 @@
         </div>
         <div class="col-md-3">
           <div class="my-2">
-            <p
-              class="bg-light"
-              v-for="cart in carts"
-              :key="cart.id"
-            >
-              {{ cart.id }}
-              <strong class="ml-5">{{ cart.product_id }}Taka</strong>
-            <button  class="btn btn-danger btn-sm" @click="remove_cart(cart.id)" >X</button>
+            <p class="bg-light" v-for="cart in carts" :key="cart.id">
+              {{ cart.product.title }}
+                var = total =0;
+              <span class="" style="display: none">{{
+                (total += cart.product.price * cart.quantity)
+              }}</span>
+              <strong class="ml-5"
+                >{{ cart.product.price * cart.quantity }} Taka</strong
+              >
+              <button
+                class="btn btn-danger btn-sm"
+                @click="remove_cart(cart.id)"
+              >
+                X
+              </button>
+              <br /><br />
             </p>
+            <strong class="">total {{ total_price }} Taka</strong>
+
+            <section class="my-4">
+              <div class="text-center bg-primary text-light">
+                <h2>Order Plece</h2>
+              </div>
+              <div class="my-2">
+                <form
+                  action=""
+                  class="form-group"
+                  @submit.prevent="order_confirm"
+                >
+                  <div class="form-group">
+                    <label for="">Select Customer</label>
+                    <select v-model="customer_id" name="customer_id" class="form-control" id="">
+                      <option value="">Select Customer</option>
+                      <option v-for="customer in customers" :key="customer.id" :value="customer.id">{{customer.name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-gorup">
+                    <label for="">Total Price</label>
+                    <input v-model="total_price" type="number" class="form-control"  name="" id="">
+                  </div>
+
+                  <div class="form-gorup">
+                    <label for="">Total Due</label>
+                    <input v-model="due_price" type="number" class="form-control" placeholder="Enter Due Payment"  name="" id="">
+                  </div>
+
+                  <div class="text-center my-2">
+                    <input type="submit" name="" class="btn btn-primary" value="Order Confirm" id="">
+                  </div>
+
+                </form>
+              </div>
+            </section>
           </div>
         </div>
       </div>
@@ -81,12 +126,24 @@
 <script>
 import axios from "axios";
 export default {
+
   data() {
     return {
+
       search: "",
+      customer_id: "",
+      due_price : "",
+      user_id : localStorage.getItem("user_id")
     };
   },
   computed: {
+    total_price() {
+      var total = 0;
+      this.carts.forEach((cart) => {
+        total += cart.product.price * cart.quantity;
+      });
+      return total;
+    },
     categories() {
       return this.$store.getters.getCategory;
     },
@@ -96,6 +153,9 @@ export default {
     products() {
       return this.$store.getters.getProduct;
     },
+    customers(){
+      return this.$store.getters.getCustomer
+    }
   },
   methods: {
     getCategory() {
@@ -147,23 +207,56 @@ export default {
         });
     },
 
-    remove_cart(id){
-      axios.get('http://localhost/laravelVuejsPos/public/api/cart/delete/' +id).then((response)=>{
-        this.all_cart();
-      })
+    remove_cart(id) {
+      axios
+        .get("http://localhost/laravelVuejsPos/public/api/cart/delete/" + id)
+        .then((response) => {
+          this.all_cart();
+        });
     },
 
-    all_cart(){
+    all_cart() {
       var user_id = localStorage.getItem("user_id");
-      axios.get('http://localhost/laravelVuejsPos/public/api/all-cart/' + user_id).then((response)=>{
-        console.log(response.data)
-        this.$store.commit("setCart", response.data)
+      axios
+        .get("http://localhost/laravelVuejsPos/public/api/all-cart/" + user_id)
+        .then((response) => {
+          console.log(response.data);
+          this.$store.commit("setCart", response.data);
+        });
+    },
 
-      })
+    total_taka(cart) {
+      for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+      }
+    },
+
+    all_customer(){
+    axios.get('customer/index').then((response)=>{
+      console.log(response.data);
+      this.$store.commit('setCustomer', response.data)
+    })
+    },
+    order_confirm(){
+      var user_id = localStorage.getItem("user_id");
+      axios
+        .post("/order", {
+          customer_id: this.customer_id,
+          total: this.total_price,
+          due_price: this.due_price,
+          user_id: this.user_id,
+        })
+        .then(response=> {
+          console.log(response)
+          this.all_cart()
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   },
   mounted() {
-    this.all_product(), this.getCategory(), this.all_cart()
+    this.all_product(), this.getCategory(), this.all_cart(), this.all_customer;
   },
 };
 </script>

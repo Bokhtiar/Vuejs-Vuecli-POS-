@@ -47,7 +47,7 @@
                 class="form-control bg-transparent border-0"
                 placeholder="Search projects"
               />
-              <input type="submit" class="btn btn-sm btn-success" value="Search" name="" id="">
+              <input type="submit" class="btn btn-sm btn-primary" value="Search" name="" id="">
             </div>
           </form>
         </div>
@@ -92,7 +92,7 @@
 
 
           <router-link :to="{path: '/logout'}">Logout</router-link>
-            
+
 
           <li class="nav-item dropdown">
             <a

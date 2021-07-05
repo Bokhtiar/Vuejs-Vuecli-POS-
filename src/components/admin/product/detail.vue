@@ -18,7 +18,7 @@
             </div>
 
             <div class="my-5">
-                <span><strong>Product Code : </strong>{{ item.product_code }}</span><br><br>
+                <span><strong>Product Code : </strong># {{ item.product_code }}</span><br><br>
                 <span><strong>Product Quantity : </strong>{{ item.product_quantity }}</span><br><br>
                 <span><strong>Category : </strong>{{ item.category.name }}</span><br><br>
                 <span><strong>Brand : </strong>Test</span><br><br>

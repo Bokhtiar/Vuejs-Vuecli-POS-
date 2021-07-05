@@ -8,7 +8,7 @@
         </div>
       <div class="row justify-content-center">
         <div class="col-md-8 my-5">
-          <form action="">
+          <form @submit.prevent="update_brand" action="">
             <div class="form-group">
               <label class="h5" for="">Brands Name:</label>
               <input placeholder="Brands Name" v-model="form.name" type="text" class="form-control" name="" id="">
@@ -23,20 +23,27 @@
 </template>
 
 <script>
+import Form from 'vform'
 import axios from 'axios'
 export default {
   data(){
     return {
-      form:{
-        name:'',
-      }
+      form: new Form({
+        name: '',
+      })
     }
   },
 
   methods:{
     editBrand(){
-      axios.get('https://fakestoreapi.com/users/' + this.$route.params.id).then(response =>{
-        this.form.name = response.data.name.firstname
+      axios.get('/brand/edit/' + this.$route.params.id).then(response =>{
+        console.log(response)
+        this.form.name = response.data.name
+      })
+    },
+    update_brand(){
+      this.form.post("/brand/update/" +this.$route.params.id).then((response)=>{
+        this.$router.push('/brands')
       })
     }
   },

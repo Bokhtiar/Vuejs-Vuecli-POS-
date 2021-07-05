@@ -24,7 +24,7 @@
           <tbody style="background-color: white">
             <tr v-for="brand in brands" :key="brand.id">
               <th style="width: 10px" scope="row">{{ brand.id }}</th>
-              <td>{{ brand.name.firstname }}</td>
+              <td>{{ brand.name }}</td>
               <td>
                 <router-link  :to="{path:'/edit-brand/' + brand.id}" class="btn btn-success btn-sm"
                   ><i class="mdi mdi-table-edit"></i
@@ -57,14 +57,13 @@ export default {
   },
   methods: {
     allBrand() {
-      axios.get("https://fakestoreapi.com/users").then((response) => {
-
+      axios.get("/brand/index").then((response) => {
         this.$store.commit('setBrand', response.data)
       });
     },
     removeBrand(id){
-      axios.delete('https://fakestoreapi.com/users/' + id).then(response =>{
-
+      axios.get('brand/delete/' + id).then(response =>{
+        this.allBrand();
       })
     }
   },

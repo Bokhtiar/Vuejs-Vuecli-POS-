@@ -8,10 +8,10 @@
         </div>
       <div class="row justify-content-center">
         <div class="col-md-8 my-5">
-          <form action="">
+          <form @submit.prevent="add_brand" action="">
             <div class="form-group">
               <label class="h5" for="">Brands Name: </label>
-              <input placeholder="Brands Name" type="text" class="form-control" name="" id="">
+              <input v-model="form.name" placeholder="Brands Name" type="text" class="form-control" name="" id="">
             </div>
             <div class="float-right">
               <button type="submit" class="btn btn-info">Create New Brand</button>
@@ -24,12 +24,24 @@
 
 <script>
 import axios from 'axios'
+import Form from 'vform'
 export default {
   data(){
     return {
-      brands: [],
+      form : new Form({
+        name:"",
+      })
     }
   },
+
+  methods:{
+    add_brand(){
+      this.form.post('/brand/store').then((response)=>{
+        console.log(response.data)
+        this.$router.push('/brands');
+      })
+    }
+  }
 
 
 }

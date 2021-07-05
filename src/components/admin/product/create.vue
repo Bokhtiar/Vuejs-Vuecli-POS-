@@ -212,10 +212,28 @@ computed: {
 
                 let formData = new FormData();
                 formData.append('title', this.title);
+                formData.append('product_code', this.product_code);
+                formData.append('product_quantity', this.product_quantity);
+
                 formData.append('category_id', this.category_id);
                 formData.append('brand_id', this.brand_id);
+
+                formData.append('product_unit', this.product_unit);
+                formData.append('product_sell_unit', this.product_sell_unit);
+                formData.append('product_purchase_unit', this.product_purchase_unit);
+
+                formData.append('product_cost_price', this.product_cost_price);
                 formData.append('price', this.price);
+                formData.append('pos_display', this.pos_display);
+
                 formData.append('image', this.image);
+                formData.append('description', this.description);
+
+                formData.append('product_promotion', this.product_promotion);
+
+                formData.append('promotional_price', this.promotional_price);
+                formData.append('promotion_start_date', this.promotion_start_date);
+                formData.append('promotion_end_date', this.promotion_end_date);
 
                 axios.post('/product/store', formData, config)
                 .then((response) => {

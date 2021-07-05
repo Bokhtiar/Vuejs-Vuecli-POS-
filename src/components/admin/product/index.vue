@@ -36,6 +36,11 @@
               <td>
                 <router-link
               class="btn btn-success btn-sm"
+              :to="{ path: '/product-detail/' + product.id }"
+              ><i class="mdi mdi-table-eye">view</i
+            ></router-link>
+            <router-link
+              class="btn btn-success btn-sm"
               :to="{ path: '/product-edit/' + product.id }"
               ><i class="mdi mdi-table-edit"></i
             ></router-link>

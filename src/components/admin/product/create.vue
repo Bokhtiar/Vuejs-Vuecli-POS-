@@ -37,7 +37,7 @@
         </div>
 
         <div class=" row">
-          <div class=" form-group col-sm-12 col-md-6 col-lg-6">
+          <div class=" form-group col-sm-12 col-md-4 col-lg-4">
             <label for="">Select Category</label>
             <select v-model="category_id" class="form-control" name="category_id" id="">
               <option value="">Select Category</option>
@@ -45,11 +45,19 @@
             </select>
           </div>
 
-          <div class=" form-group col-sm-12 col-md-6 col-lg-6">
+          <div class=" form-group col-sm-12 col-md-4 col-lg-4">
             <label for="">Select Brand</label>
             <select v-model="brand_id" class="form-control" name="brand_id" id="">
-              <option value="1">Category</option>
-              <option value="2">Category</option>
+              <option value="2">Select Brand</option>
+              <option v-for="item in brand" :key="item.id" :value="item.id">{{item.name}}</option>
+            </select>
+          </div>
+
+          <div class=" form-group col-sm-12 col-md-4 col-lg-4">
+            <label for="">Select Company</label>
+            <select v-model="company_id" class="form-control" name="brand_id" id="">
+              <option value="1">Select Company</option>
+              <option v-for="item in companies" :key="item.id" :value="item.id">{{item.name}}</option>
             </select>
           </div>
         </div>
@@ -178,6 +186,7 @@ export default {
               product_quantity:'',
               category_id : '',
               brand_id : '',
+              company_id : '',
               product_unit:'',
               product_sell_unit:'',
               product_purchase_unit:'',
@@ -196,6 +205,12 @@ computed: {
     items() {
       return this.$store.getters.getCategory;
     },
+    brand(){
+      return this.$store.getters.getBrand;
+    },
+    companies(){
+      return this.$store.getters.getCompany
+    }
   },
   methods:{
             onImageChange(e){
@@ -217,6 +232,7 @@ computed: {
 
                 formData.append('category_id', this.category_id);
                 formData.append('brand_id', this.brand_id);
+                formData.append('company_id', this.company_id);
 
                 formData.append('product_unit', this.product_unit);
                 formData.append('product_sell_unit', this.product_sell_unit);
@@ -246,17 +262,32 @@ computed: {
             },
     getCategory() {
       axios
-        .get("http://localhost/laravelVuejsPos/public/api/category/index")
+        .get("/category/index")
         .then((response) => {
           this.$store.commit("SetCategory", response.data);
         });
     },
 
+    allBrand() {
+      axios.get("/brand/index").then((response) => {
+        this.$store.commit('setBrand', response.data)
+      });
+    },
+
+    allCompany() {
+      axios.get("/company/index").then((response) => {
+        this.$store.commit('setCompany', response.data)
+      });
+    },
+
+
+
   },
 
   mounted(){
-    this.getCategory()
-  }
+    this.getCategory(), this.allBrand(), this.allCompany();
+  },
+
 }
 </script>
 

@@ -21,7 +21,8 @@
                 <span><strong>Product Code : </strong># {{ item.product_code }}</span><br><br>
                 <span><strong>Product Quantity : </strong>{{ item.product_quantity }}</span><br><br>
                 <span><strong>Category : </strong>{{ item.category.name }}</span><br><br>
-                <span><strong>Brand : </strong>Test</span><br><br>
+                <span><strong>Brand : </strong>{{item.brand.name}}</span><br><br>
+                <span><strong>Company : </strong >{{item.company.name}}</span><br><br>
                 <router-link :to="{path:'/products'}" class="btn btn-primary">Back</router-link>
             </div>
         </div>
@@ -41,7 +42,7 @@
         <span><strong>Product Purchase Unit Sell : </strong>{{ item.product_purchase_unit }} </span><br><br>
       </div>
 
-      <div class="my-3" v-if="item.product_promotion == 1">
+      <div class="my-3" v-if="item.product_promotion = 1">
         <h2 class="bg-primary text-light">Product Promotion</h2>
         <span><strong>Promotional Price : </strong>{{ item.promotional_price }} Taka</span><br><br>
         <span><strong>Promotion Start Date : </strong>{{ item.promotion_start_date }} </span><br><br>

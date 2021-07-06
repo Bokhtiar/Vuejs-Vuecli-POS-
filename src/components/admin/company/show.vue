@@ -71,7 +71,8 @@ export default {
   methods: {
 
     all_product() {
-      axios.get("http://localhost/laravelVuejsPos/public/api/product/index").then((res) => {
+      var id = this.$route.params.id
+      axios.get("/brand/show/" + id).then((res) => {
         this.$store.commit("setProduct", res.data);
       });
     },

@@ -31,7 +31,7 @@
       <td>
             <router-link
               class="btn btn-success btn-sm"
-              :to="{ path: '/edit-category/' + company.id }"
+              :to="{ path: '/company/show/' + company.id }"
               ><i class="mdi mdi-table-eye">View</i
             ></router-link>
 

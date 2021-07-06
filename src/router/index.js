@@ -39,6 +39,10 @@ export default new Router({
           path: '/company/edit/:id',
           component: () => import('../components/admin/company/edit.vue'),
         },
+        {
+          path: '/company/show/:id',
+          component: () => import('../components/admin/company/show.vue'),
+        },
 
         {
           path: '/create-brand',

@@ -35,6 +35,14 @@
                 <i class="mdi mdi-contacts menu-icon"></i>
               </router-link>
             </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path: '/Company'}">
+                <span class="menu-title">Company Product</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </router-link>
+            </li>
+
             <li class="nav-item">
               <router-link class="nav-link" :to="{path: '/products'}">
                 <span class="menu-title">Products</span>

@@ -8,6 +8,7 @@ export const storage = {
     product: [],
     customer: [],
     order: [],
+    company: [],
   },
   getters: {
     getInventory(state){
@@ -33,7 +34,12 @@ export const storage = {
     },
     getOrder(state){
       return state.order
+    },
+    getCompany(state){
+      return state.company
     }
+
+
   },
   mutations: {
     setInventory(state, payload){
@@ -62,6 +68,9 @@ export const storage = {
     },
     setOrder(state, payload){
       state.order = payload
+    },
+    setCompany(state, payload){
+      state.company = payload
     }
   }
 }

@@ -28,6 +28,19 @@ export default new Router({
           component: () => import('../components/admin/brand/index.vue'),
         },
         {
+          path: '/company',
+          component: () => import('../components/admin/company/index.vue'),
+        },
+        {
+          path: '/company/create',
+          component: () => import('../components/admin/company/create.vue'),
+        },
+        {
+          path: '/company/edit/:id',
+          component: () => import('../components/admin/company/edit.vue'),
+        },
+
+        {
           path: '/create-brand',
           component: () => import('../components/admin/brand/create.vue'),
         },

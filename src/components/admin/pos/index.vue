@@ -28,9 +28,9 @@
       </form>
     </div>
 
-    <section class="mt-2">
-      <div class="row">
-        <div class="col-md-9">
+    <section class="mt-2 container">
+      <div class="">
+        <div class="">
           <div class="row">
             <div
               v-for="product in products"
@@ -60,8 +60,9 @@
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="my-2">
+        <div class="">
+
+          <!-- <div class="my-2">
             <p class="bg-light" v-for="cart in carts" :key="cart.id">
               {{ cart.product.title }}
 
@@ -116,24 +117,103 @@
                 </form>
               </div>
             </section>
-          </div>
+          </div> -->
         </div>
       </div>
+    </section><hr>
+
+    <section class="row my-4">
+      <div class="col-md-6">
+        <table class="table text-center" >
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="cart in carts" :key="cart.id">
+                <td style="">{{ cart.product.title }}</td>
+
+                <span class="" style="display: none">{{
+                (total += cart.product.price * cart.quantity)
+              }}</span>
+
+
+                <td style="widht: 60px">
+                  <form @submit.prevent="cart_quantity(cart.id)" method="post">
+                    <input :value="cart.quantity" style="width: 43px" type="number" name=""  />
+                  </form>
+                </td>
+                <td>{{ cart.product.price * cart.quantity }} tk </td>
+                <td>
+                  <button
+                class="btn btn-danger btn-sm"
+                @click="remove_cart(cart.id)"
+              >
+                X
+              </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="float-right text-light bg-primary btn">
+            {{total_price}} Tk
+          </div>
+      </div>
+
+      <div class="col-md-6 my-4">
+        <div class="bg-primary text-center text-light">
+          <h3>Order Place</h3>
+        </div>
+        <form
+                  action=""
+                  class="form-group"
+                  @submit.prevent="order_confirm"
+                >
+                  <div class="form-group">
+                    <label for="">Select Customer</label>
+                    <select v-model="customer_id" name="customer_id" class="form-control" id="">
+                      <option value="">Select Customer</option>
+                      <option v-for="customer in customers" :key="customer.id" :value="customer.id">{{customer.name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-gorup">
+                    <label for="">Total Price</label>
+                    <input v-model="total_price" type="number" class="form-control"  name="" id="">
+                  </div>
+
+                  <div class="form-gorup">
+                    <label for="">Total Due</label>
+                    <input v-model="due_price" type="number" class="form-control" placeholder="Enter Due Payment"  name="" id="">
+                  </div>
+
+                  <div class="text-center my-2">
+                    <input type="submit" name="" class="btn btn-primary" value="Order Confirm" id="">
+                  </div>
+
+                </form>
+      </div>
     </section>
+
+
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-
   data() {
     return {
-  
+      quantity:"",
       search: "",
       customer_id: "",
-      due_price : "",
-      user_id : localStorage.getItem("user_id")
+      due_price: "",
+      user_id: localStorage.getItem("user_id"),
     };
   },
   computed: {
@@ -153,9 +233,9 @@ export default {
     products() {
       return this.$store.getters.getProduct;
     },
-    customers(){
-      return this.$store.getters.getCustomer
-    }
+    customers() {
+      return this.$store.getters.getCustomer;
+    },
   },
   methods: {
     getCategory() {
@@ -200,6 +280,7 @@ export default {
           user_id: user_id,
         })
         .then((response) => {
+
           this.all_cart();
         })
         .catch((error) => {
@@ -220,7 +301,7 @@ export default {
       axios
         .get("http://localhost/laravelVuejsPos/public/api/all-cart/" + user_id)
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           this.$store.commit("setCart", response.data);
         });
     },
@@ -231,13 +312,13 @@ export default {
       }
     },
 
-    all_customer(){
-    axios.get('customer/index').then((response)=>{
-      console.log(response.data);
-      this.$store.commit('setCustomer', response.data)
-    })
+    all_customer() {
+      axios.get("customer/index").then((response) => {
+        console.log(response.data);
+        this.$store.commit("setCustomer", response.data);
+      });
     },
-    order_confirm(){
+    order_confirm() {
       var user_id = localStorage.getItem("user_id");
       axios
         .post("/order", {
@@ -246,13 +327,21 @@ export default {
           due_price: this.due_price,
           user_id: this.user_id,
         })
-        .then(response=> {
-          console.log(response)
-          this.all_cart()
+        .then((response) => {
+          console.log(response);
+          this.all_cart();
         })
         .catch(function (error) {
           console.log(error);
         });
+    },
+
+    cart_quantity(id){
+      axios
+        .post("/quantity/update/"+id, {
+        }).then((response)=>{
+          this.all_cart()
+        })
     }
   },
   mounted() {

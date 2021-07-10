@@ -68,10 +68,7 @@ export default new Router({
           path: '/product-detail/:id',
           component: () => import('../components/admin/product/detail.vue'),
         },
-        {
-          path: '/pos',
-          component: () => import('../components/admin/pos/index.vue'),
-        },
+
 
         {
           path: '/customers',
@@ -112,6 +109,10 @@ export default new Router({
           component: () => import('../components/admin/auth/logout.vue'),
         },
       ]
+    },
+    {
+      path: '/pos',
+      component: () => import('../components/admin/pos/index.vue'),
     },
 
   ]

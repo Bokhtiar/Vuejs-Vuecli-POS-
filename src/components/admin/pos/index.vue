@@ -1,43 +1,92 @@
 <template>
-  <div class="my-5">
-    <div class="">
-      <ul>
-        <li v-for="category in categories" :key="category.id">
-          <button
-            @click="category_ways_product_show(category.id)"
-            class="mt-2 btn btn-primary btn-sm"
-            href="#home"
-          >
-            {{ category.name }}
-          </button>
+  <div class="">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand text-light" href="#">POS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto bg-primary">
+        <li class="nav-item">
+          <router-link class="nav-link bg-primary text-light h5" :to="{path:'/'}">Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link  bg-primary text-light h5" :to="{path:'/customers'}">Customer</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link  bg-primary text-light h5" :to="{path:'/categories'}">Category</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link  bg-primary text-light h5" :to="{path:'/products'}">Product</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link  bg-primary text-light h5" :to="{path:'/brands'}">Brands</router-link>
         </li>
       </ul>
     </div>
+  </nav>
 
-    <div class="my-3">
-      <form action="">
-        <input
-          v-model="search"
-          @input="searchword"
-          placeholder="Search Product"
-          type="text"
-          name=""
-          class="form-control"
-          id=""
-        />
-      </form>
+
+    <div class="">
+      <ul>
+        <li v-for="category in categories" :key="category.id"></li>
+      </ul>
     </div>
 
-    <section class="mt-2 container">
-      <div class="">
-        <div class="">
+    <section class="">
+      <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2">
+          <div class="text-center">
+            <h3 class="bg-primary text-light">Categories</h3>
+            <span v-for="category in categories" :key="category.id">
+              <button
+                @click="category_ways_product_show(category.id)"
+                class="mt-1"
+                style="border: none; background-color: transparent"
+              >
+                {{ category.name }}</button
+              ><br />
+            </span>
+          </div>
+
+          <div class="text-center my-2">
+            <h3 class="bg-primary text-light">Brands</h3>
+            <span v-for="brand in brands" :key="brand.id">
+              <button
+                @click="brand_ways_product_show(brand.id)"
+                class="mt-1"
+                style="border: none; background-color: transparent"
+              >
+                {{ brand.name }}</button
+              ><br />
+            </span>
+          </div>
+        </div>
+        <!--brand and category end -->
+
+        <div class="col-sm-12 col-md-6">
+          <div class="">
+            <form action="">
+              <input
+                v-model="search"
+                @input="searchword"
+                placeholder="Search Product"
+                type="text"
+                name=""
+
+                class="form-control"
+                id=""
+              />
+            </form>
+          </div>
           <div class="row">
             <div
               v-for="product in products"
               :key="product.id"
               class="col-md-3 col-sm-6 col-lg-3"
             >
-              <div class="my-2 bg-light">
+              <div class="my-2">
                 <img
                   class="p-1 my-3"
                   height="150px"
@@ -60,146 +109,116 @@
             </div>
           </div>
         </div>
-        <div class="">
+        <!--product show end -->
 
-          <!-- <div class="my-2">
-            <p class="bg-light" v-for="cart in carts" :key="cart.id">
-              {{ cart.product.title }}
+        <div class="col-md-4 col-sm-12 col-lg-4">
+          <table class="table text-center">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="cart in carts" :key="cart.id">
+              <td style="">{{ cart.product.title }}</td>
 
               <span class="" style="display: none">{{
                 (total += cart.product.price * cart.quantity)
               }}</span>
-              <strong class="ml-5"
-                >{{ cart.product.price * cart.quantity }} Taka</strong
-              >
-              <button
-                class="btn btn-danger btn-sm"
-                @click="remove_cart(cart.id)"
-              >
-                X
-              </button>
-              <br /><br />
-            </p>
-            <strong class="">total {{ total_price }} Taka</strong>
 
-            <section class="my-4">
-              <div class="text-center bg-primary text-light">
-                <h2>Order Plece</h2>
-              </div>
-              <div class="my-2">
-                <form
-                  action=""
-                  class="form-group"
-                  @submit.prevent="order_confirm"
-                >
-                  <div class="form-group">
-                    <label for="">Select Customer</label>
-                    <select v-model="customer_id" name="customer_id" class="form-control" id="">
-                      <option value="">Select Customer</option>
-                      <option v-for="customer in customers" :key="customer.id" :value="customer.id">{{customer.name}}</option>
-                    </select>
-                  </div>
-
-                  <div class="form-gorup">
-                    <label for="">Total Price</label>
-                    <input v-model="total_price" type="number" class="form-control"  name="" id="">
-                  </div>
-
-                  <div class="form-gorup">
-                    <label for="">Total Due</label>
-                    <input v-model="due_price" type="number" class="form-control" placeholder="Enter Due Payment"  name="" id="">
-                  </div>
-
-                  <div class="text-center my-2">
-                    <input type="submit" name="" class="btn btn-primary" value="Order Confirm" id="">
-                  </div>
-
+              <td style="widht: 60px">
+                <form @submit.prevent="cart_quantity(cart.id)" method="post">
+                  <input
+                    class="q"
+                    :value="cart.quantity"
+                    style="width: 43px"
+                    type="number"
+                    name="quantity"
+                  />
                 </form>
-              </div>
-            </section>
-          </div> -->
+              </td>
+              <td>{{ cart.product.price * cart.quantity }} tk</td>
+              <td>
+                <button
+                  class="btn btn-primary btn-sm"
+                  @click="remove_cart(cart.id)"
+                >
+                  X
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="float-right text-light bg-primary btn">
+          {{ total_price }} Tk
         </div>
-      </div>
-    </section><hr>
+        <br><br><br>
 
-    <section class="row my-4">
-      <div class="col-md-6">
-        <table class="table text-center" >
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Price</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="cart in carts" :key="cart.id">
-                <td style="">{{ cart.product.title }}</td>
-
-                <span class="" style="display: none">{{
-                (total += cart.product.price * cart.quantity)
-              }}</span>
-
-
-                <td style="widht: 60px">
-                  <form @submit.prevent="cart_quantity(cart.id)" method="post">
-                    <input :value="cart.quantity" style="width: 43px" type="number" name=""  />
-                  </form>
-                </td>
-                <td>{{ cart.product.price * cart.quantity }} tk </td>
-                <td>
-                  <button
-                class="btn btn-danger btn-sm"
-                @click="remove_cart(cart.id)"
-              >
-                X
-              </button>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
-          <div class="float-right text-light bg-primary btn">
-            {{total_price}} Tk
-          </div>
-      </div>
-
-      <div class="col-md-6 my-4">
-        <div class="bg-primary text-center text-light">
+         <div class="bg-primary text-center text-light">
           <h3>Order Place</h3>
         </div>
-        <form
-                  action=""
-                  class="form-group"
-                  @submit.prevent="order_confirm"
-                >
-                  <div class="form-group">
-                    <label for="">Select Customer</label>
-                    <select v-model="customer_id" name="customer_id" class="form-control" id="">
-                      <option value="">Select Customer</option>
-                      <option v-for="customer in customers" :key="customer.id" :value="customer.id">{{customer.name}}</option>
-                    </select>
-                  </div>
+        <form action="" class="form-group" @submit.prevent="order_confirm">
+          <div class="form-group">
+            <label for="">Select Customer</label>
+            <select
+              v-model="customer_id"
+              name="customer_id"
+              class="form-control"
+              id=""
+            >
+              <option value="">Select Customer</option>
+              <option
+                v-for="customer in customers"
+                :key="customer.id"
+                :value="customer.id"
+              >
+                {{ customer.name }}
+              </option>
+            </select>
+          </div>
 
-                  <div class="form-gorup">
-                    <label for="">Total Price</label>
-                    <input v-model="total_price" type="number" class="form-control"  name="" id="">
-                  </div>
+          <div class="form-gorup">
+            <label for="">Total Price</label>
+            <input
+              v-model="total_price"
+              type="number"
+              class="form-control"
+              name=""
+              id=""
+            />
+          </div>
 
-                  <div class="form-gorup">
-                    <label for="">Total Due</label>
-                    <input v-model="due_price" type="number" class="form-control" placeholder="Enter Due Payment"  name="" id="">
-                  </div>
+          <div class="form-gorup">
+            <label for="">Total Due</label>
+            <input
+              v-model="due_price"
+              type="number"
+              class="form-control"
+              placeholder="Enter Due Payment"
+              name=""
+              id=""
+            />
+          </div>
 
-                  <div class="text-center my-2">
-                    <input type="submit" name="" class="btn btn-primary" value="Order Confirm" id="">
-                  </div>
-
-                </form>
+          <div class="text-center my-2">
+            <input
+              type="submit"
+              name=""
+              class="btn btn-primary"
+              value="Order Confirm"
+              id=""
+            />
+          </div>
+        </form>
+        </div>
+        <!--cart and order end -->
       </div>
     </section>
 
+    <hr />
 
   </div>
 </template>
@@ -209,7 +228,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      quantity:"",
+      quantity: "",
       search: "",
       customer_id: "",
       due_price: "",
@@ -235,6 +254,9 @@ export default {
     },
     customers() {
       return this.$store.getters.getCustomer;
+    },
+    brands() {
+      return this.$store.getters.getBrand;
     },
   },
   methods: {
@@ -264,6 +286,11 @@ export default {
           this.$store.commit("setProduct", response.data);
         });
     },
+    brand_ways_product_show(id) {
+      axios.get("/brand/ways/product/" + id).then((response) => {
+        this.$store.commit("setProduct", response.data);
+      });
+    },
     all_product() {
       axios
         .get("http://localhost/laravelVuejsPos/public/api/product/index")
@@ -280,7 +307,6 @@ export default {
           user_id: user_id,
         })
         .then((response) => {
-
           this.all_cart();
         })
         .catch((error) => {
@@ -336,16 +362,23 @@ export default {
         });
     },
 
-    cart_quantity(id){
-      axios
-        .post("/quantity/update/"+id, {
-        }).then((response)=>{
-          this.all_cart()
-        })
-    }
+    cart_quantity(id) {
+      axios.post("/quantity/update/" + id).then((response) => {
+        this.all_cart();
+      });
+    },
+    allBrand() {
+      axios.get("/brand/index").then((response) => {
+        this.$store.commit("setBrand", response.data);
+      });
+    },
   },
   mounted() {
-    this.all_product(), this.getCategory(), this.all_cart(), this.all_customer;
+    this.all_product(),
+      this.getCategory(),
+      this.all_cart(),
+      this.all_customer(),
+      this.allBrand();
   },
 };
 </script>

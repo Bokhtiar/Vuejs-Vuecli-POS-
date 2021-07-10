@@ -66,6 +66,12 @@ methods:{
       this.$store.commit("setOrder", response.data)
     })
   },
+
+  remove(id){
+    axios.get('/order/delete/' + id).then((response)=>{
+      this.all_order()
+    })
+  }
 },
 
 mounted() {

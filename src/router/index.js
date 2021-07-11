@@ -95,25 +95,27 @@ export default new Router({
           component: () => import('../components/admin/order/detail.vue'),
         },
 
-        {
-          path: '/login',
-          component: () => import('../components/admin/auth/login.vue'),
-        },
 
-        {
-          path: '/registration',
-          component: () => import('../components/admin/auth/register.vue'),
-        },
-
-        {
-          path: '/logout',
-          component: () => import('../components/admin/auth/logout.vue'),
-        },
       ]
     },
     {
       path: '/pos',
       component: () => import('../components/admin/pos/index.vue'),
+    },
+
+    {
+      path: '/login',
+      component: () => import('../components/admin/auth/login.vue'),
+    },
+
+    {
+      path: '/registration',
+      component: () => import('../components/admin/auth/register.vue'),
+    },
+
+    {
+      path: '/logout',
+      component: () => import('../components/admin/auth/logout.vue'),
     },
 
   ]

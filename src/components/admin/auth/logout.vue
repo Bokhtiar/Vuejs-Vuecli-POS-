@@ -7,7 +7,9 @@
 <script>
 export default {
   mounted(){
-    localStorage.removeItem('Atoken');
+
+    localStorage.removeItem('AToken');
+    localStorage.removeItem('user_id');
     this.$router.push('/login')
   }
 

@@ -13,7 +13,7 @@
     <!-- Login Form -->
     <form @submit.prevent="login" @keydown="form.onKeydown($event)">
       <input v-model="form.email" type="email" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input v-model="form.password" type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+      <input v-model="form.password"  type="password" id="password" class="fadeIn third" name="login" placeholder="password">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
@@ -22,17 +22,6 @@
   </div>
 </div>
 
-  <!-- <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-    <input v-model="form.email" type="text" name="email" placeholder="email">
-    <div v-if="form.errors.has('email')" v-html="form.errors.get('email')" />
-
-    <input v-model="form.password" type="password" name="password" placeholder="Password">
-    <div v-if="form.errors.has('password')" v-html="form.errors.get('password')" />
-
-    <button type="submit" :disabled="form.busy">
-      Log In
-    </button>
-  </form> -->
   </div>
 </template>
 

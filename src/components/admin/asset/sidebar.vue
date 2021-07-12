@@ -69,6 +69,20 @@
               </router-link>
             </li>
 
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path:'/orders'}">
+                <span class="menu-title">Report</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path:'/registration'}">
+                <span class="menu-title">New Admin</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </router-link>
+            </li>
+
 
 
           </ul>

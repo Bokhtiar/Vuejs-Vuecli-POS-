@@ -70,22 +70,10 @@
             </a>
           </li>
 
-            <router-link :to="{path:'/login'}">Login</router-link>
-          <router-link :to="{path: '/registration'}">Register</router-link>
-
-
-          <router-link :to="{path: '/logout'}">Logout</router-link>
-
-
           <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
+            <router-link class="nav-link" :to="{path: '/logout'}">
               <i class="mdi mdi-power"></i>
-            </a>
-          </li>
-          <li class="nav-item nav-settings d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-format-line-spacing"></i>
-            </a>
+            </router-link>
           </li>
         </ul>
         <button

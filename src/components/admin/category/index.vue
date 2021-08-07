@@ -19,8 +19,8 @@
         </tr>
       </thead>
       <tbody style="background-color: white">
-        <tr v-for="item in items" :key="item.id">
-          <th style="width: 10px" scope="row">{{ item.id }}</th>
+        <tr v-for="(item, index) in items" :key="item.id">
+          <th style="width: 10px" scope="row">{{ index +1 }} </th>
           <td>{{ item.name }}</td>
           <td>
             <span v-if="item.status == 1">

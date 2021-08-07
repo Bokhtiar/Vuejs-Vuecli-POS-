@@ -22,8 +22,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="customer in customers" :key="customer.id">
-      <th scope="row">{{customer.id}}</th>
+    <tr v-for="(customer, index) in customers" :key="customer.id">
+      <th scope="row">{{index +1}}</th>
       <td>{{customer.name}}</td>
       <td>{{customer.email}}</td>
       <td>{{customer.phone}}</td>

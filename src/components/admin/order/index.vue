@@ -13,24 +13,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="order in orders" :key="order.id">
-      <th scope="row">1</th>
+    <tr v-for="(order,index) in orders" :key="order.id">
+      <th scope="row">{{index +1}}</th>
       <td>{{order.customer.name}}</td>
       <td>{{order.customer.email}}</td>
       <td>{{order.customer.phone}}</td>
       <td>{{order.total_price}}</td>
       <td>{{order.due_price}}</td>
       <td>
-        <span v-if="order.status == 1">
-              <button @click="status(order.id)" class="btn btn-sm btn-info">
-                <i class="mdi mdi-debug-step-into"></i>
-              </button>
-            </span>
-            <span v-else>
-              <button @click="status(order.id)" class="btn btn-sm btn-info">
-                <i class="mdi mdi-debug-step-out"></i>
-              </button>
-            </span>
+
 
             <router-link
               class="btn btn-success btn-sm"

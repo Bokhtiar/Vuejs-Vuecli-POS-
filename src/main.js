@@ -8,6 +8,7 @@ window.$ = window.jQuery = require('jQuery')
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
 //axios setup
 import axios from 'axios'
 window.axios = axios

@@ -22,8 +22,8 @@
             </tr>
           </thead>
           <tbody style="background-color: white">
-            <tr v-for="brand in brands" :key="brand.id">
-              <th style="width: 10px" scope="row">{{ brand.id }}</th>
+            <tr v-for="(brand, index) in brands" :key="brand.id">
+              <th style="width: 10px" scope="row">{{ index +1 }}</th>
               <td>{{ brand.name }}</td>
               <td>
                 <router-link  :to="{path:'/edit-brand/' + brand.id}" class="btn btn-success btn-sm"

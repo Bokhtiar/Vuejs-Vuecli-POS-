@@ -52,14 +52,6 @@
               <option v-for="item in brand" :key="item.id" :value="item.id">{{item.name}}</option>
             </select>
           </div>
-
-          <div class=" form-group col-sm-12 col-md-4 col-lg-4">
-            <label for="">Select Company</label>
-            <select v-model="company_id" class="form-control" name="brand_id" id="">
-              <option value="1">Select Company</option>
-              <option v-for="item in companies" :key="item.id" :value="item.id">{{item.name}}</option>
-            </select>
-          </div>
         </div>
 
 

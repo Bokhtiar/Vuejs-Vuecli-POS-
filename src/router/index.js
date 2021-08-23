@@ -29,22 +29,9 @@ export default new Router({
           component: () => import('../components/admin/brand/index.vue'),
         },
         {
-          path: '/company',
-          component: () => import('../components/admin/company/index.vue'),
+          path: '/brand/product/:id',
+          component: () => import('../components/admin/brand/show.vue'),
         },
-        {
-          path: '/company/create',
-          component: () => import('../components/admin/company/create.vue'),
-        },
-        {
-          path: '/company/edit/:id',
-          component: () => import('../components/admin/company/edit.vue'),
-        },
-        {
-          path: '/company/show/:id',
-          component: () => import('../components/admin/company/show.vue'),
-        },
-
         {
           path: '/create-brand',
           component: () => import('../components/admin/brand/create.vue'),
@@ -69,11 +56,14 @@ export default new Router({
           path: '/product-detail/:id',
           component: () => import('../components/admin/product/detail.vue'),
         },
-
-
         {
           path: '/customers',
           component: () => import('../components/admin/customer/index.vue'),
+        },
+
+        {
+          path: '/customer/view/:id',
+          component: () => import('../components/admin/customer/details.vue'),
         },
 
         {
@@ -93,6 +83,18 @@ export default new Router({
         {
           path: '/order/detail/:id',
           component: () => import('../components/admin/order/detail.vue'),
+        },
+        {
+          path: '/monthly/sell',
+          component: () => import('../components/admin/report/month.vue'),
+        },
+        {
+          path: '/year/sell',
+          component: () => import('../components/admin/report/year.vue'),
+        },
+        {
+          path: '/day/sell',
+          component: () => import('../components/admin/report/day.vue'),
         },
 
 

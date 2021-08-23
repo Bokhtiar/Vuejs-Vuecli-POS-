@@ -6,9 +6,9 @@
           class="card-header d-flex justify-content-between align-item-center"
         >
           <h2 class="mb-0">Create Category Form</h2>
-<a class="text-light btn btn-icon btn-primary text-center " style="width:180px; padding:12px" href="#">
+<router-link class="text-light btn btn-icon btn-primary text-center " style="width:180px; padding:12px" :to="{path:'/categories'}">
         All Categories
-      </a>
+      </router-link>
         </div>
 
         <div class="card">

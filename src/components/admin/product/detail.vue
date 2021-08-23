@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-5 col-sm-12 col-lg-5">
             <div class="container polaroid-hover">
-                <img :src="item.image" height="400px" width="100%" alt="">
+                <img :src="imgUrl(item.image)" height="400px" width="100%" alt="">
             </div>
         </div>
         <div class="col-md-7 col-sm-12 col-lg-7">
@@ -63,6 +63,9 @@ export default {
     }
   },
 methods:{
+  imgUrl(img){
+    return "http://localhost:8000/" + img
+  },
   detail(){
     axios.get('http://localhost/laravelVuejsPos/public/api/product/detail/'+this.$route.params.id).then(response=>{
       console.log(response.data);

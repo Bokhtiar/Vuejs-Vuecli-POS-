@@ -36,7 +36,7 @@
               Monthly Sales
               <i class="mdi mdi-chart-line mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">23</h2>
+            <h2 class="mb-5">{{month}}</h2>
             <h6 class="card-text">Increased by 60%</h6>
           </div>
         </div>
@@ -50,11 +50,11 @@
               alt="circle-image"
             />
             <h4 class="font-weight-normal mb-3">
-              Weekly Orders
+              Day Orders
               <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">45,6334</h2>
-            <h6 class="card-text">Decreased by 10%</h6>
+            <h2 class="mb-5">{{day}}</h2>
+            <h6 class="card-text">Increased by 10%</h6>
           </div>
         </div>
       </div>
@@ -67,10 +67,10 @@
               alt="circle-image"
             />
             <h4 class="font-weight-normal mb-3">
-              Visitors Online
+              Year Order
               <i class="mdi mdi-diamond mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">95,5741</h2>
+            <h2 class="mb-5">{{year}}</h2>
             <h6 class="card-text">Increased by 5%</h6>
           </div>
         </div>
@@ -81,10 +81,10 @@
       <div class="col-12 grid-margin">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Order List</h4>
+            <h2 class="card-title"> <span><i class="h3 mdi mdi-cart"></i></span> Order List</h2>
             <div class="table-responsive">
-              <table class="table">
-                <thead>
+              <table class="table text-center">
+                <thead class="font-weight-bold">
                   <tr>
                     <th scope="col">Index</th>
                     <th scope="col">Customer Name</th>
@@ -96,21 +96,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="order in orders" :key="order.id">
-                    <th scope="row">1</th>
+
+                  <tr v-for="(order, index) in orders" :key="order.id">
+                    <th scope="row">{{index +1}}</th>
                     <td>{{ order.customer.name }}</td>
                     <td>{{ order.customer.email }}</td>
                     <td>{{ order.customer.phone }}</td>
-                    <td>{{ order.total_price }}</td>
-                    <td>{{ order.due_price }}</td>
+                    <td>{{ order.total_price }}<span>৳</span> </td>
+                    <td>{{ order.due_price }}<span>৳</span></td>
                     <td>
 
 
                       <router-link
                         class="btn btn-success btn-sm"
                         :to="{ path: 'order/detail/' + order.id }"
-                        ><i class="mdi mdi-table-edit"></i
-                      ></router-link>
+                        ><i class="mdi mdi-eye"></i></router-link>
                       <button
                         @click="remove(order.id)"
                         class="btn btn-danger btn-sm"
@@ -134,6 +134,16 @@
 import axios from "axios";
 export default {
 
+mounted() {
+    this.all_order(), this.monthly_amount(),this.year_amount(),this.day_amount();
+  },
+  data(){
+    return{
+      month:'',
+      year: '',
+      day:'',
+    }
+  },
   computed: {
     orders() {
       return this.$store.getters.getOrder;
@@ -143,9 +153,20 @@ export default {
   methods: {
     monthly_amount(){
       axios.get('/monthly/sell').then((response)=>{
-        console.log('hi');
+        this.month = response.data.total
       })
     },
+    year_amount(){
+      axios.get('/year/sell').then((response)=>{
+        this.year = response.data.total
+      })
+    },
+    day_amount(){
+      axios.get('/day/sell').then((response)=>{
+        this.day = response.data.total
+      })
+    },
+
     all_order() {
       axios.get("/order/index").then((response) => {
         console.log(response.data);
@@ -160,9 +181,7 @@ export default {
     },
   },
 
-  mounted() {
-    this.all_order(), this.monthly_amount();
-  },
+
 };
 </script>
 

@@ -34,6 +34,13 @@
               :to="{ path: '/edit/customer/' + customer.id }"
               ><i class="mdi mdi-table-edit"></i
             ></router-link>
+
+            <router-link
+              class="btn btn-success btn-sm"
+              :to="{ path: '/customer/view/' + customer.id }"
+              ><i class="">View</i
+            ></router-link>
+
             <button
               @click="remove(customer.id)"
               class="btn btn-danger btn-sm"

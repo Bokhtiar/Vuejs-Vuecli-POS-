@@ -23,13 +23,19 @@
           </thead>
           <tbody style="background-color: white">
             <tr v-for="(brand, index) in brands" :key="brand.id">
-              <th style="width: 10px" scope="row">{{ index +1 }}</th>
+              <th style="width: 10px" scope="row">{{ index + 1 }}</th>
               <td>{{ brand.name }}</td>
               <td>
-                <router-link  :to="{path:'/edit-brand/' + brand.id}" class="btn btn-success btn-sm"
-                  ><i class="mdi mdi-table-edit"></i
-                ></router-link>
-                <button @click="removeBrand(brand.id)" class="btn btn-danger btn-sm" href="">
+                <router-link
+                  :to="{ path: '/brand/product/' + brand.id }"
+                  class="btn btn-primary btn-sm"
+                  >View</router-link
+                >
+                <button
+                  @click="removeBrand(brand.id)"
+                  class="btn btn-danger btn-sm"
+                  href=""
+                >
                   <i class="mdi mdi-delete"></i>
                 </button>
               </td>
@@ -45,35 +51,30 @@
 import axios from "axios";
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
-  computed:{
-    brands(){
-      return this.$store.getters.getBrand
+  computed: {
+    brands() {
+      return this.$store.getters.getBrand;
     }
-
   },
   methods: {
     allBrand() {
-      axios.get("/brand/index").then((response) => {
-        this.$store.commit('setBrand', response.data)
+      axios.get("/brand/index").then(response => {
+        this.$store.commit("setBrand", response.data);
       });
     },
-    removeBrand(id){
-      axios.get('brand/delete/' + id).then(response =>{
+    removeBrand(id) {
+      axios.get("brand/delete/" + id).then(response => {
         this.allBrand();
-      })
+      });
     }
   },
 
-  mounted(){
-    this.allBrand()
+  mounted() {
+    this.allBrand();
   }
-
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -25,28 +25,19 @@
             <li class="nav-item">
               <router-link class="nav-link"  :to="{path: '/categories'}">
                 <span class="menu-title">Categories</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                <i class="mdi mdi-certificate menu-icon"></i>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" :to="{path: '/brands'}">
                 <span class="menu-title">Brands</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
+                <i class="mdi mdi-notification-clear-all menu-icon"></i>
               </router-link>
             </li>
-
-            <li class="nav-item">
-              <router-link class="nav-link" :to="{path: '/Company'}">
-                <span class="menu-title">Company Product</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
-              </router-link>
-            </li>
-
             <li class="nav-item">
               <router-link class="nav-link" :to="{path: '/products'}">
                 <span class="menu-title">Products</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <i class="mdi mdi-desktop-mac menu-icon"></i>
               </router-link>
             </li>
             <li class="nav-item">
@@ -70,8 +61,22 @@
             </li>
 
             <li class="nav-item">
-              <router-link class="nav-link" :to="{path:'/orders'}">
-                <span class="menu-title">Report</span>
+              <router-link class="nav-link" :to="{path:'/day/sell'}">
+                <span class="menu-title">This Day Sell</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path:'/monthly/sell'}">
+                <span class="menu-title">This Monthly Sell</span>
+                <i class="mdi mdi-table-large menu-icon"></i>
+              </router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{path:'/year/sell'}">
+                <span class="menu-title">This Year Sell</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
               </router-link>
             </li>

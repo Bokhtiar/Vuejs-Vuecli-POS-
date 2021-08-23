@@ -1,14 +1,7 @@
 <template>
   <div class="my-5">
     <div class="card-header d-flex justify-content-between align-item-center">
-      <h2 class="mb-0">LIST OF PRODUCTS</h2>
-      <router-link
-        class="text-light btn btn-icon btn-primary text-center"
-        style="width: 180px; padding: 12px"
-        :to="{ path: '/product/create' }"
-      >
-        CREATE PRODUCT
-      </router-link>
+      <h2 class="mb-0">LIST OF PRODUCTS BRAND</h2>
     </div>
     <div class="row justify-content-center">
       <div class="col-md-12">
@@ -17,7 +10,7 @@
             <tr>
               <th scope="col">index</th>
               <th scope="col">title</th>
-              <th scope="col">Category Name</th>
+              <th scope="col">Category Name </th>
               <th scope="col">Image</th>
               <th scope="col">Price</th>
               <th scope="col">Action</th>
@@ -29,10 +22,7 @@
               <td style="width:100px">{{ product.title }}</td>
               <td>{{ product.category.name }}</td>
               <td>
-                <img
-                  :src="imgurl(product.image)"
-                  alt="test"
-                />
+                <img :src="imgUrl(product.image)" />
               </td>
               <td>{{ product.price }}</td>
               <td>
@@ -41,11 +31,13 @@
                   :to="{ path: '/product-detail/' + product.id }"
                   ><i class="mdi mdi-table-eye">view</i></router-link
                 >
+
                 <router-link
                   class="btn btn-success btn-sm"
                   :to="{ path: '/product-edit/' + product.id }"
                   ><i class="mdi mdi-table-edit"></i
                 ></router-link>
+
                 <button
                   @click="removeBrand(product.id)"
                   class="btn btn-danger btn-sm"
@@ -64,25 +56,22 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
 export default {
-  computed: {
-    products() {
-      return this.$store.getters.getProduct;
-    }
+  data() {
+    return {
+      products: []
+    };
   },
   methods: {
-    imgurl(img) {
-      return "http://127.0.0.1:8000/" + img;
+    imgUrl(img) {
+      return "http://localhost:8000/" + img;
     },
-
-    Allproduct() {
-      axios
-        .get("http://localhost/laravelVuejsPos/public/api/product/index")
-        .then(res => {
-          console.log(res);
-          this.$store.commit("setProduct", res.data);
-        });
+    all_product() {
+      var id = this.$route.params.id;
+      axios.get("/brand/show/" + id).then(r => {
+        console.log(r.data);
+        this.products = r.data;
+      });
     },
 
     removeBrand(id) {
@@ -94,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    this.Allproduct();
+    this.all_product();
   }
 };
 </script>

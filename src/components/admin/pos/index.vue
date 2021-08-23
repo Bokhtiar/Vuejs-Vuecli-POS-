@@ -91,7 +91,7 @@
                   class="p-1 my-3"
                   height="150px"
                   width="150px"
-                  :src="product.image"
+                  :src="imgUrl(product.image)"
                   alt=""
                 />
               </div>
@@ -260,6 +260,9 @@ export default {
     },
   },
   methods: {
+    imgUrl(img){
+      return "http://localhost:8000/" + img
+    },
     getCategory() {
       axios
         .get("http://localhost/laravelVuejsPos/public/api/category/index")
